@@ -1,3 +1,5 @@
+var music = require('./controller/music.js');
+
 var GetRoutes = {};
 var PostRoutes = {};
 var PutRoutes = {};
@@ -8,10 +10,20 @@ exports.route = function (route) {
   for (var path in GetRoutes) {
     route.get(path, GetRoutes[path]);
   }
+
+  for (var path in PostRoutes) {
+    route.post(path, PostRoutes[path]);
+  }
+
+  for (var path in PutRoutes) {
+    route.put(path, PutRoutes[path]);
+  }
+
+  for (var path in DelRoutes) {
+    route.delete(path, DelRoutes[path]);
+  }
+
 }
 
 
-GetRoutes['/Hello'] = function (req,res,next) {
-  var name = req.query.name;
-  res.send(`Hello  ${name}`);
-}
+GetRoutes['/api/Music'] = music.getMusicById; //scott御用接口
