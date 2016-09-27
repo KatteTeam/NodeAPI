@@ -5,4 +5,4 @@ Node提供接口服务
 
 2.route中创建接口路由
 
-3.测试访问
+3.测试访问 localhost:8080/Hello?name=katte
