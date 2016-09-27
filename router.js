@@ -1,28 +1,27 @@
-var music = require('./controller/music.js');
+const music = require('./controller/music.js');
 
-var GetRoutes = {};
-var PostRoutes = {};
-var PutRoutes = {};
-var DelRoutes = {};
+let GetRoutes = {};
+let PostRoutes = {};
+let PutRoutes = {};
+let DelRoutes = {};
 
 
-exports.route = function (route) {
-  for (var path in GetRoutes) {
+exports.route = (route) => {
+  for (let path in GetRoutes) {
     route.get(path, GetRoutes[path]);
   }
 
-  for (var path in PostRoutes) {
+  for (let path in PostRoutes) {
     route.post(path, PostRoutes[path]);
   }
 
-  for (var path in PutRoutes) {
+  for (let path in PutRoutes) {
     route.put(path, PutRoutes[path]);
   }
 
-  for (var path in DelRoutes) {
+  for (let path in DelRoutes) {
     route.delete(path, DelRoutes[path]);
   }
-
 }
 
 

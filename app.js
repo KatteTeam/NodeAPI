@@ -1,13 +1,13 @@
-var restify = require('restify');
-var router = require('./router');
+const restify = require('restify');
+const router = require('./router');
 
-var server = restify.createServer();
+const server = restify.createServer();
 
 server.use(restify.queryParser());
 
 //加載接口路由
 router.route(server);
 
-server.listen(8080,function(){
-  console.log("%s listening at %s",server.name,server.url);
+server.listen(8080, () => {
+  console.log("%s listening at %s", server.name, server.url);
 });
