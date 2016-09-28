@@ -9,7 +9,10 @@ const http = require('http');
  */
 exports.getMusicById = (req, res, next) => {
     let id = req.query.id;
-    http.get(`http://120.24.162.247/api/Music?id=${id}`, (response) => {
+    //http://music.163.com/api/playlist/detail?id=  ,  http://120.24.162.247/api/Music?id=
+    var url = `http://music.163.com/api/playlist/detail?id=${id}`;
+    var url0 = `http://120.24.162.247/api/Music?id=${id}`;
+    http.get(url, (response) => {
         console.log(`Got response: ${res.statusCode}`);
         let str = "";
         response.setEncoding('utf8');
@@ -17,9 +20,35 @@ exports.getMusicById = (req, res, next) => {
             str += r;
         });
         response.on('end', () => {
-            res.send(JSON.parse(str));
+            res.send(musicListResult(str));
         });
     }).on('error', (e) => {
         console.log(`Got error: ${e.message}`);
     });
+}
+
+let musicListResult = (model) => {
+    model = JSON.parse(model);
+    let result = model.result.tracks;
+    let muiscResult = [];
+    result.forEach((item, index) => {
+        let obj = {
+            name: item.name,
+            src: item.mp3Url,
+            author: formatArtisets(item.artists),
+            cover: item.album.picUrl
+        }
+        muiscResult.push(obj);
+    });
+
+    return muiscResult;
+}
+
+let formatArtisets = (artists) => {
+    let artistsResult = [];
+    artists.forEach((item, index) => {
+        artistsResult.push(item.name);
+    });
+
+    return artistsResult.join("&");
 }
