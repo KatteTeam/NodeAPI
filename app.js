@@ -8,6 +8,6 @@ server.use(restify.queryParser());
 //加載接口路由
 router.route(server);
 
-server.listen(8080, () => {
+server.listen(3000, () => {
   console.log("%s listening at %s", server.name, server.url);
 });
