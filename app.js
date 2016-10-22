@@ -1,10 +1,11 @@
 ﻿const restify = require('restify');
+const compression = require('compression');
 const router = require('./router');
 
 const server = restify.createServer();
 
 server.use(restify.queryParser());
-
+server.use(compression());
 //加載接口路由
 router.route(server);
 
